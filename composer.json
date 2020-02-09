@@ -1,3 +1,41 @@
 {
-    "require": {}
+    "name": "zerai/oe-module-demo-farm-add-ons",
+    "license": "MIT",
+    "description": "OpenEMR Demo Farm Add-ons module",
+    "keywords": ["open-emr"],
+    "type": "openemr-module",
+    "authors": [
+        {"name": "Teclai Zerai", "email": "teclaizerai@gmail.com"}
+    ],
+    "support": {
+        "issues": "https://github.com/zerai/oe-module-demo-farm-add-ons/issues",
+        "source": "https://github.com/zerai/oe-module-demo-farm-add-ons"
+    },
+    "minimum-stability": "stable",
+    "require": {
+        "php": "^7.2",
+        "openemr/oe-module-installer-plugin": "^0.1.3"
+
+    },
+    "require-dev": {
+        "friendsofphp/php-cs-fixer": "^2.16",
+        "phpstan/phpstan": "^0.12.9",
+        "phpunit/phpunit": "~8.4"
+    },
+    "config": {
+        "preferred-install": {
+            "*": "dist"
+        },
+        "sort-packages": true
+    },
+    "autoload": {
+        "psr-4": {
+            "OpenEMR\\Modules\\DemoFarmAddOns\\": "src/"
+        }
+    },
+    "autoload-dev": {
+        "psr-4": {
+            "OpenEMR\\Modules\\DemoFarmAddOns\\Tests\\": "tests/"
+        }
+    }
 }
