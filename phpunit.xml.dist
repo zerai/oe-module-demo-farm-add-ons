@@ -4,6 +4,8 @@
          bootstrap="tests/bootstrap.php"
          colors="true"
          verbose="true"
+         failOnRisky="true"
+         beStrictAboutTestsThatDoNotTestAnything="true"
 >
     <testsuites>
         <testsuite name="all">

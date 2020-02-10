@@ -24,6 +24,7 @@
         "symfony/event-dispatcher": "^4.4"
     },
     "require-dev": {
+        "doctrine/collections": "1.6.4",
         "friendsofphp/php-cs-fixer": "^2.16",
         "guzzlehttp/psr7": "^1.0",
         "php-http/message": "^1.0",
