@@ -4,7 +4,10 @@ declare(strict_types=1);
 namespace OpenEMR\Modules\DemoFarmAddOns\Finder;
 
 use GuzzleHttp\Psr7\Request;
+use Http\Client\Exception\HttpException;
 use Http\Client\HttpClient;
+use HttpRuntimeException;
+use RuntimeException;
 
 class PackagistModuleFinder implements ModuleFinder
 {
@@ -22,9 +25,11 @@ class PackagistModuleFinder implements ModuleFinder
         $this->httpClient = $httpClient;
     }
 
+
     /**
      * @param string $queryString
      * @return PackagistItemCollection
+     * @throws \Psr\Http\Client\ClientExceptionInterface
      */
     public function searchModule(string $queryString = ''): ModuleItemCollection
     {
@@ -37,6 +42,12 @@ class PackagistModuleFinder implements ModuleFinder
         return $packagistItemCollection;
     }
 
+
+    /**
+     * @param string $queryString
+     * @return string
+     * @throws \Psr\Http\Client\ClientExceptionInterface
+     */
     // TODO change visibility in private
     public function doSend(string $queryString = ''): string
     {
@@ -50,8 +61,8 @@ class PackagistModuleFinder implements ModuleFinder
         );
 
         if (200 !== $response->getStatusCode()) {
-            // TODO
-            //throw new HttpRuntimeException
+            // TODO improve exception handeling - see php-http doc.
+            throw new RuntimeException('Http error.');
         }
 
         return $response->getBody()->getContents();

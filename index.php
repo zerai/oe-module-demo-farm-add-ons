@@ -10,6 +10,7 @@ require_once(__DIR__ . "/../../../globals.php");
 
 use Http\Discovery\HttpClientDiscovery;
 use Http\Discovery\MessageFactoryDiscovery;
+use OpenEMR\Modules\DemoFarmAddOns\Finder\PackagistItemCollection;
 use OpenEMR\Modules\DemoFarmAddOns\Finder\PackagistModuleFinder;
 use OpenEMR\Core\Header;
 
@@ -36,6 +37,7 @@ $moduleFinder = new PackagistModuleFinder($client);
                 <small class="text-muted">- source: (packagist.org)</small>
             </h3>
             <?php
+            /** @var PackagistItemCollection $collection */
             $collection = $moduleFinder->searchModule();
             echo generateTable($collection->getItems());
             ?>
