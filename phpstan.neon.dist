@@ -6,10 +6,18 @@ parameters:
     paths:
         - src
         - tests
+        - index.php
 
 
     ignoreErrors:
         #- '##'
+        - '#Function generateTable not found.#'
+
+
+        # Excludes calls to openEMR functions and Helper classes, these files  are not in the codebase,
+        # but the module need it at runtime
+        - '#Function xlt not found.#'
+        - '#Call to static method setupHeader\(\) on an unknown class OpenEMR\\Core\\Header.#'
 
 
     excludes_analyse:
