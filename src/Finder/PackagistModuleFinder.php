@@ -66,7 +66,7 @@ class PackagistModuleFinder implements ModuleFinder
         $packagistItems = [];
 
         foreach ($itemsFromResponse as $item) {
-            $packagistItems[] = PackagistItem::create($item['name'], $item['description'], $item['url'], $item['repository']);
+            $packagistItems[] = PackagistItem::create($item['name'], $item['description'], $item['url'], $item['repository'], $item['downloads']);
         }
 
         return new PackagistItemCollection($packagistItems);

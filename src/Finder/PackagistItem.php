@@ -17,24 +17,29 @@ class PackagistItem implements ModuleItem
     /** @var string */
     private $repository;
 
+    /** @var int */
+    private $downloads;
+
     /**
      * PackagistItem constructor.
      * @param string $name
      * @param string $description
      * @param string $url
      * @param string $repository
+     * @param int $downloads
      */
-    private function __construct(string $name, string $description, string $url, string $repository)
+    private function __construct(string $name, string $description, string $url, string $repository, int $downloads)
     {
         $this->name = $name;
         $this->description = $description;
         $this->url = $url;
         $this->repository = $repository;
+        $this->downloads = $downloads;
     }
 
-    public static function create(string $name, string $description, string $url, string $repository): self
+    public static function create(string $name, string $description, string $url, string $repository, int $downloads): self
     {
-        return new self($name, $description, $url, $repository);
+        return new self($name, $description, $url, $repository, $downloads);
     }
 
     /**
@@ -67,5 +72,13 @@ class PackagistItem implements ModuleItem
     public function getRepository(): string
     {
         return $this->repository;
+    }
+
+    /**
+     * @return int
+     */
+    public function getDownloads(): int
+    {
+        return $this->downloads;
     }
 }

@@ -66,25 +66,28 @@ function generateTable(array $items): string
     }
 
     $table = '
-    	<table class="table table-bordered">
+    	<div class="table-responsive">
+    	<table class="table table-bordered table-striped">
 		  <thead>
 		    <tr>
 		      <th scope="col">#</th>
 		      <th scope="col">Name</th>
 		      <th scope="col">Url</th>
+		      <th scope="col">Downloads</th>
 		    </tr>
 		  </thead>
 		  <tbody>
 	';
 
     foreach ($items as $key => $item) {
-        $tableRow = sprintf('<tr><th scope="row">%s</th><td>%s</td><td><a href="%s" target="new">%s</a></td></tr>', (string)((int) $key + 1), $item->getName(), $item->getUrl(), $item->getUrl());
+        $tableRow = sprintf('<tr><th scope="row">%s</th><td>%s</td><td><a href="%s" target="new">%s</a></td><td>%s</td></tr>', (string)((int) $key + 1), $item->getName(), $item->getUrl(), $item->getUrl(), (string) $item->getDownloads());
         $table .= $tableRow;
     }
 
     $table .='
 		  </tbody>
 		</table>
+	    </div>
   ';
 
     return $table;
