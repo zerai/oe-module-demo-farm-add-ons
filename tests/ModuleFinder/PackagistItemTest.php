@@ -18,7 +18,8 @@ class PackagistItemTest extends TestCase
             self::IRRELEVANT,
             self::IRRELEVANT,
             self::IRRELEVANT,
-            self::IRRELEVANT
+            self::IRRELEVANT,
+            100
         );
 
         self::assertInstanceOf(ModuleItem::class, $packagistItem);
@@ -27,5 +28,6 @@ class PackagistItemTest extends TestCase
         self::assertSame(self::IRRELEVANT, $packagistItem->getDescription());
         self::assertSame(self::IRRELEVANT, $packagistItem->getUrl());
         self::assertSame(self::IRRELEVANT, $packagistItem->getRepository());
+        self::assertSame(100, $packagistItem->getDownloads());
     }
 }

@@ -61,4 +61,14 @@ JSON;
 }
 JSON;
     }
+
+    private function packagistEmptyResultResponseContent():string
+    {
+        return <<<JSON
+{
+  "results": [],
+  "total": 0
+}
+JSON;
+    }
 }

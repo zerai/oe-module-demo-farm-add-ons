@@ -3,6 +3,7 @@ declare(strict_types=1);
 
 namespace OpenEMR\Modules\DemoFarmAddOns\Tests\ModuleFinder;
 
+use Exception;
 use Http\Mock\Client;
 use OpenEMR\Modules\DemoFarmAddOns\Finder\PackagistModuleFinder;
 use PHPUnit\Framework\TestCase;
@@ -33,6 +34,41 @@ class PackagistModuleFinderTest extends TestCase
         self::assertEquals(2, $foundedModulesCollection->count());
     }
 
+    /** @test */
+    public function can_handle_http_exception():void
+    {
+        $this->expectException(\RuntimeException::class);
+
+        $clientException = new \RuntimeException('Whoops! The server is down.');
+        $client = $this->createHttpClientWithExceptionResponse($clientException, 500);
+        $packagistModuleFinder = new PackagistModuleFinder($client);
+
+        $packagistModuleFinder->searchModule();
+    }
+
+    /** @test */
+    public function can_build_a_collection(): void
+    {
+        self::markTestSkipped();
+    }
+
+    /**
+     * This is an edge case, the module system is based on "openemr/oe-module-installer-plugin"
+     * it should always appear in the search results.
+     * 0 result should never happen.
+     *
+     * @test
+     */
+    public function can_handle_a_empty_respose_content():void
+    {
+        $client = $this->createHttpClientWithDefaultResponse($this->packagistEmptyResponseContent());
+        $packagistModuleFinder = new PackagistModuleFinder($client);
+
+        $foundedModulesCollection = $packagistModuleFinder->searchModule();
+
+        self::assertEquals(0, $foundedModulesCollection->count());
+    }
+
     private function createHttpClientWithDefaultResponse(string $contentResponse, int $httpStatusCode = 200): Client
     {
         $client = new Client();
@@ -45,6 +81,14 @@ class PackagistModuleFinderTest extends TestCase
         $response->expects(self::any())->method('getBody')->willReturn($stream);
 
         $client->setDefaultResponse($response);
+
+        return $client;
+    }
+
+    private function createHttpClientWithExceptionResponse(Exception $exception, int $httpStatusCode): Client
+    {
+        $client = new Client();
+        $client->addException($exception);
 
         return $client;
     }
@@ -62,11 +106,5 @@ class PackagistModuleFinderTest extends TestCase
 
         $this->assertEquals($response, $returnedResponse);
         $this->assertEquals(200, $returnedResponse->getStatusCode());
-    }
-
-    /** @test */
-    public function can_build_a_collection(): void
-    {
-        self::markTestSkipped();
     }
 }
