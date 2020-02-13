@@ -4,12 +4,12 @@ declare(strict_types=1);
 namespace OpenEMR\Modules\DemoFarmAddOns\Finder;
 
 use Doctrine\Common\Collections\ArrayCollection;
+use Webmozart\Assert\Assert;
 
 class PackagistItemCollection implements ModuleItemCollection
 {
     /** @var ArrayCollection <int,PackagistItem>*/
     private $collection;
-
 
     /**
      * PackagistItemCollection constructor.
@@ -17,7 +17,7 @@ class PackagistItemCollection implements ModuleItemCollection
      */
     public function __construct(iterable $collection = [])
     {
-        //TODO add safe guard instance of PackagistItem
+        Assert::allIsInstanceOf($collection, PackagistItem::class);
         $this->collection = new ArrayCollection((array) $collection);
     }
 
