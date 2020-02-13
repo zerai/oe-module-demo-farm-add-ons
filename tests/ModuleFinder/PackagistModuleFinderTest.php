@@ -69,6 +69,37 @@ class PackagistModuleFinderTest extends TestCase
         self::assertEquals(0, $foundedModulesCollection->count());
     }
 
+    /** @test */
+    public function can_generate_an_valid_http_endpoint_without_an_input_queryString_parameter(): void
+    {
+        $expectedEndpoint = 'https://packagist.org/search.json?q=&type=openemr-module';
+
+        $packagistModuleFinder = new PackagistModuleFinder($client = new Client());
+
+        $endpoint = $packagistModuleFinder->endpoint();
+
+        self::assertStringContainsString('type=openemr-module', $endpoint);
+        self::assertSame($expectedEndpoint, $endpoint);
+        self::assertTrue((bool) filter_var($endpoint, FILTER_VALIDATE_URL));
+    }
+
+    /** @test */
+    public function can_generate_an_valid_http_endpoint_from_an_input_queryString_parameter(): void
+    {
+        $queryString = 'vendor_1';
+
+        $expectedEndpoint = 'https://packagist.org/search.json?q='.$queryString.'&type=openemr-module';
+
+        $packagistModuleFinder = new PackagistModuleFinder($client = new Client());
+
+        $endpoint = $packagistModuleFinder->endpoint($queryString);
+
+        self::assertStringContainsString('type=openemr-module', $endpoint);
+        self::assertSame($expectedEndpoint, $endpoint);
+        self::assertTrue((bool) filter_var($endpoint, FILTER_VALIDATE_URL));
+    }
+
+
     private function createHttpClientWithDefaultResponse(string $contentResponse, int $httpStatusCode = 200): Client
     {
         $client = new Client();

@@ -1,4 +1,4 @@
-sudo: required
+#sudo: required
 
 
 dist: trusty
@@ -106,30 +106,35 @@ jobs:
 
 
 
-    - name: '(Composer module installation test - remove in future)'
-      php: '7.2'
-      include:
-        - # require the branch name to be release* or hotfix* (note for PRs this is the base branch name)
-          if: branch =~ /^(release|hotfix)
-      script:
-        - git clone https://github.com/openemr/openemr.git openemr_codebase
-        # remove vendor dir
-        - rm -fR openemr_codebase/vendor/
-        - ls -al openemr_codebase/
-
-
-        # installation for prod environment - last version of the module with --no-dev option
-        - cp -R openemr_codebase/ codebase_prod
-        - composer install --no-dev --working-dir=codebase_prod/
-        - composer require zerai/oe-module-demo-farm-add-ons --working-dir=codebase_prod/
-        - rm -fR codebase_prod/vendor/
-        - composer install --no-dev --working-dir=codebase_prod/
-
-
-        # installation for dev environment - last version of the module
-        - cp -R openemr_codebase/ codebase_dev
-        - composer install --working-dir=codebase_dev/
-        - composer require zerai/oe-module-demo-farm-add-ons --working-dir=codebase_dev/
-        - rm -fR codebase_dev/vendor/
-        - composer install --working-dir=codebase_dev/
+#    - name: '(Composer module installation test - remove in future)'
+#      php: '7.2'
+#      branches:
+#        only:
+#        - master
+#        - ^release
+#        - ^v0
+#        except:
+#        - develop
+#        - ^feature
+#      script:
+#        - git clone https://github.com/openemr/openemr.git openemr_codebase
+#        # remove vendor dir
+#        - rm -fR openemr_codebase/vendor/
+#        - ls -al openemr_codebase/
+#
+#
+#        # installation for prod environment - last version of the module with --no-dev option
+#        - cp -R openemr_codebase/ codebase_prod
+#        - composer install --no-dev --working-dir=codebase_prod/
+#        - composer require zerai/oe-module-demo-farm-add-ons --working-dir=codebase_prod/
+#        - rm -fR codebase_prod/vendor/
+#        - composer install --no-dev --working-dir=codebase_prod/
+#
+#
+#        # installation for dev environment - last version of the module
+#        - cp -R openemr_codebase/ codebase_dev
+#        - composer install --working-dir=codebase_dev/
+#        - composer require zerai/oe-module-demo-farm-add-ons --working-dir=codebase_dev/
+#        - rm -fR codebase_dev/vendor/
+#        - composer install --working-dir=codebase_dev/
 
