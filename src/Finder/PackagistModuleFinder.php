@@ -25,7 +25,6 @@ class PackagistModuleFinder implements ModuleFinder
         $this->httpClient = $httpClient;
     }
 
-
     /**
      * @param string $queryString
      * @return PackagistItemCollection
@@ -33,7 +32,8 @@ class PackagistModuleFinder implements ModuleFinder
      */
     public function searchModule(string $queryString = ''): ModuleItemCollection
     {
-        $jsonResponse = $this->doSend($queryString);
+        $endpoint = $this->endpoint($queryString);
+        $jsonResponse = $this->doSend($endpoint);
         $decodedResponse = json_decode($jsonResponse, true);
         $itemsFromResponse = $decodedResponse['results'];
 
@@ -42,21 +42,22 @@ class PackagistModuleFinder implements ModuleFinder
         return $packagistItemCollection;
     }
 
+    public function endpoint(string $queryString = ''): string
+    {
+        return sprintf('https://%s/search.json?q=%s&type=openemr-module', self::HOST, $queryString);
+    }
 
     /**
-     * @param string $queryString
+     * @param string $httpEndpoint
      * @return string
      * @throws \Psr\Http\Client\ClientExceptionInterface
      */
-    // TODO change visibility in private
-    public function doSend(string $queryString = ''): string
+    private function doSend(string $httpEndpoint): string
     {
-        $endpoint = sprintf('https://%s/search.json?q=%s&type=openemr-module', self::HOST, $queryString);
-
         $response = $this->httpClient->sendRequest(
             new Request(
                 'GET',
-                $endpoint
+                $httpEndpoint
             )
         );
 
