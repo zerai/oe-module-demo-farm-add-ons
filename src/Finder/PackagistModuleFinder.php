@@ -37,9 +37,7 @@ class PackagistModuleFinder implements ModuleFinder
         $decodedResponse = json_decode($jsonResponse, true);
         $itemsFromResponse = $decodedResponse['results'];
 
-        $packagistItemCollection = $this->buildCollection($itemsFromResponse);
-
-        return $packagistItemCollection;
+        return $this->buildCollection($itemsFromResponse);
     }
 
     public function endpoint(string $queryString = ''): string
