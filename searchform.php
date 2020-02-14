@@ -41,6 +41,55 @@ $moduleFinder = new PackagistModuleFinder($client);
             //echo generateTable($collection->getItems());
             ?>
 
+
+            <script>
+                // Fax and SMS status
+                function retrieveMsgs(e = '', req = '') {
+                    top.restoreSession();
+                    if (e) {
+                        e.preventDefault();
+                    }
+                    let actionUrl = 'getPending';
+                    let id = pid;
+                    let datefrom = $('#fromdate').val();
+                    let dateto = $('#todate').val();
+                    let data = [];
+
+                    $("#brand").append(wait);
+                    $("#rcvdetails tbody").empty();
+                    $("#sentdetails tbody").empty();
+                    $("#msgdetails tbody").empty();
+                    return $.post(actionUrl,
+                        {
+                            'pid': pid,
+                            'datefrom': datefrom,
+                            'dateto': dateto
+                        }, function () {
+                        }, 'json').done(function (data) {
+                        if (data.error) {
+                            $("#wait").remove();
+                            var err = (data.error.search(/Exception/) !== -1 ? 1 : 0);
+                            if (!err) {
+                                err = (data.error.search(/Error:/) !== -1 ? 1 : 0);
+                            }
+                            if (err) {
+                                alertMsg(data.error);
+                            }
+                            return false;
+                        }
+                        // populate our panels
+                        $("#rcvdetails tbody").empty().append(data[0]);
+                        $("#sentdetails tbody").empty().append(data[1]);
+                        $("#msgdetails tbody").empty().append(data[2]);
+                        // get call logs
+                        getLogs();
+                    }).fail(function (xhr, status, error) {
+                        alertMsg(<?php echo xlj('Not Authenticated. Restart from Modules menu or ensure credentials are setup from Activity menu.') ?>, 5000)
+                    }).always(function () {
+                        $("#wait").remove();
+                    });
+                }
+            </script>
     </body>
     </html>
 
