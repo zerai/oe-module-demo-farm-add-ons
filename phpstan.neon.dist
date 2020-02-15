@@ -12,12 +12,13 @@ parameters:
 
     ignoreErrors:
         #- '##'
-        - '#Function generateTable not found.#'
+        - '#Function routerMatch not found.#'
+        - '#Call to an undefined method OpenEMR\\Modules\\DemoFarmAddOns\\Finder\\ModuleFinder::searchModule\(\).#'
 
 
         # Excludes calls to openEMR functions and Helper classes, these files  are not in the codebase,
         # but the module need it at runtime
-        - '#Function xlt not found.#'
+        #- '#Function xlt not found.#'
         - '#Call to static method setupHeader\(\) on an unknown class OpenEMR\\Core\\Header.#'
 
 
