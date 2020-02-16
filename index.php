@@ -15,6 +15,7 @@ use OpenEMR\Core\Header;
 use OpenEMR\Modules\DemoFarmAddOns\Infrastructure\UI\Api\ApiController;
 use OpenEMR\Modules\DemoFarmAddOns\Infrastructure\UI\Web\DefaultController;
 use OpenEMR\Modules\DemoFarmAddOns\Infrastructure\UI\Web\NotFoundController;
+use OpenEMR\Modules\DemoFarmAddOns\Infrastructure\UI\Web\TwigController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 
@@ -29,6 +30,11 @@ $response->send();
 
 function routerMatch(Request $request): Response
 {
+    // TODO remove twig test
+    if ($request->getRequestUri() === '/interface/modules/custom_modules/oe-module-demo-farm-add-ons/twig-test/' ||
+        $request->getRequestUri() === '/interface/modules/custom_modules/oe-module-demo-farm-add-ons/twig-test') {
+        return (new TwigController())();
+    }
     if ($request->getRequestUri() === '/interface/modules/custom_modules/oe-module-demo-farm-add-ons/api/' ||
         $request->getRequestUri() === '/interface/modules/custom_modules/oe-module-demo-farm-add-ons/api') {
         return (new ApiController())();
