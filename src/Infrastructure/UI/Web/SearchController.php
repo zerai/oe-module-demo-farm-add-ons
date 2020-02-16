@@ -8,7 +8,7 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Twig\Environment;
 
-class DefaultController
+class SearchController
 {
     /** @var ModuleFinder */
     private $moduleFinder;
@@ -16,9 +16,6 @@ class DefaultController
     /** @var Environment */
     private $twigEnvironment;
 
-    /**
-     * DefaultController constructor.
-     */
     public function __construct(ModuleFinder $moduleFinder, Environment $twigEnvironment)
     {
         $this->moduleFinder = $moduleFinder;
@@ -28,11 +25,10 @@ class DefaultController
     public function __invoke(Request $request): Response
     {
         $collection = $this->moduleFinder->searchModule();
-
         $modules = $collection->getItems();
 
         $response = new Response(
-            $this->twigEnvironment->render('packagist/default.html.twig', ['modules' => $modules]),
+            $this->twigEnvironment->render('packagist/search.html.twig', ['modules' => $modules]),
             Response::HTTP_OK,
             ['content-type' => 'text/html']
         );

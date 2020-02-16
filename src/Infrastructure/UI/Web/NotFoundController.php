@@ -5,8 +5,6 @@ namespace OpenEMR\Modules\DemoFarmAddOns\Infrastructure\UI\Web;
 
 use Symfony\Component\HttpFoundation\Response;
 
-//use OpenEMR\Core\Header;
-
 class NotFoundController
 {
     public function __invoke(): Response
@@ -22,7 +20,6 @@ class NotFoundController
 
     private function content(): string
     {
-        //$header = Header::setupHeader();
         $content = '
             <!DOCTYPE html>
                 <html>
