@@ -4,9 +4,7 @@ declare(strict_types=1);
 namespace OpenEMR\Modules\DemoFarmAddOns\Finder;
 
 use GuzzleHttp\Psr7\Request;
-use Http\Client\Exception\HttpException;
 use Http\Client\HttpClient;
-use HttpRuntimeException;
 use RuntimeException;
 
 class PackagistModuleFinder implements ModuleFinder
@@ -71,7 +69,7 @@ class PackagistModuleFinder implements ModuleFinder
      * @param iterable<array> $itemsFromResponse
      * @return PackagistItemCollection
      */
-    public function buildCollection(iterable $itemsFromResponse): PackagistItemCollection
+    private function buildCollection(iterable $itemsFromResponse): PackagistItemCollection
     {
         $packagistItems = [];
 
