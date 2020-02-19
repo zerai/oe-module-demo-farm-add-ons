@@ -24,14 +24,15 @@ class SearchController
 
     public function __invoke(Request $request): Response
     {
-        $collection = $this->moduleFinder->searchModule();
-        $modules = $collection->getItems();
+        $response = new Response();
+        try {
+            $response->setContent($this->twigEnvironment->render('packagist/search.html.twig'));
+            $response->setStatusCode(Response::HTTP_OK);
+        } catch (\Exception $exception) {
+            //TODO
+        }
 
-        $response = new Response(
-            $this->twigEnvironment->render('packagist/search.html.twig', ['modules' => $modules]),
-            Response::HTTP_OK,
-            ['content-type' => 'text/html']
-        );
+        $response->prepare($request);
 
         return $response;
     }
