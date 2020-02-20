@@ -14,7 +14,6 @@ use OpenEMR\Modules\DemoFarmAddOns\Infrastructure\Module\Container\ModuleContain
 use OpenEMR\Modules\DemoFarmAddOns\Infrastructure\UI\Api\ApiController;
 use OpenEMR\Modules\DemoFarmAddOns\Infrastructure\UI\Web\DefaultController;
 use OpenEMR\Modules\DemoFarmAddOns\Infrastructure\UI\Web\NotFoundController;
-use OpenEMR\Modules\DemoFarmAddOns\Infrastructure\UI\Web\SearchController;
 use Psr\Container\ContainerInterface;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -31,18 +30,6 @@ $response->send();
 
 function routerMatch(Request $request, ContainerInterface $container): Response
 {
-
-    // TODO REMOVE - SEARCH CONTROLLER TEST
-    if ($request->getRequestUri() === '/interface/modules/custom_modules/oe-module-demo-farm-add-ons/search/' ||
-        $request->getRequestUri() === '/interface/modules/custom_modules/oe-module-demo-farm-add-ons/search') {
-        return (new SearchController($container->get('packagist_finder_service'), $container->get('twig_service')))($request);
-    }
-
-    if ($request->getRequestUri() === '/interface/modules/custom_modules/oe-module-demo-farm-add-ons/api/' ||
-        $request->getRequestUri() === '/interface/modules/custom_modules/oe-module-demo-farm-add-ons/api') {
-        return (new ApiController($container->get('packagist_finder_service')))($request);
-    }
-
     if ($request->getRequestUri() === '/interface/modules/custom_modules/oe-module-demo-farm-add-ons/api/search/' ||
         $request->getRequestUri() === '/interface/modules/custom_modules/oe-module-demo-farm-add-ons/api/search') {
         return (new ApiController($container->get('packagist_finder_service')))($request);

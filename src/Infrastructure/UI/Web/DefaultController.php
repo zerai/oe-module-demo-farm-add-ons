@@ -16,9 +16,6 @@ class DefaultController
     /** @var Environment */
     private $twigEnvironment;
 
-    /**
-     * DefaultController constructor.
-     */
     public function __construct(ModuleFinder $moduleFinder, Environment $twigEnvironment)
     {
         $this->moduleFinder = $moduleFinder;
@@ -27,15 +24,15 @@ class DefaultController
 
     public function __invoke(Request $request): Response
     {
-        $collection = $this->moduleFinder->searchModule();
+        $response = new Response();
+        try {
+            $response->setContent($this->twigEnvironment->render('packagist/default.html.twig'));
+            $response->setStatusCode(Response::HTTP_OK);
+        } catch (\Exception $exception) {
+            //TODO
+        }
 
-        $modules = $collection->getItems();
-
-        $response = new Response(
-            $this->twigEnvironment->render('packagist/default.html.twig', ['modules' => $modules]),
-            Response::HTTP_OK,
-            ['content-type' => 'text/html']
-        );
+        $response->prepare($request);
 
         return $response;
     }
