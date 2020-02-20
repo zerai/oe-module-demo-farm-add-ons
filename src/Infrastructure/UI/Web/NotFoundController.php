@@ -9,18 +9,16 @@ class NotFoundController
 {
     public function __invoke(): Response
     {
-        $response = new Response(
+        return new Response(
             $this->content(),
             Response::HTTP_OK,
             ['content-type' => 'text/html']
         );
-
-        return $response;
     }
 
     private function content(): string
     {
-        $content = '
+        return '
             <!DOCTYPE html>
                 <html>
                 <head>
@@ -45,7 +43,5 @@ class NotFoundController
                 </body>
                 </html>
         ';
-
-        return $content;
     }
 }
