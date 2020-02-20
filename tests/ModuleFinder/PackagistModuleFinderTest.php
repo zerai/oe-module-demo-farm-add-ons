@@ -46,12 +46,6 @@ class PackagistModuleFinderTest extends TestCase
         $packagistModuleFinder->searchModule();
     }
 
-    /** @test */
-    public function can_build_a_collection(): void
-    {
-        self::markTestSkipped();
-    }
-
     /**
      * This is an edge case, the module system is based on "openemr/oe-module-installer-plugin"
      * it should always appear in the search results.

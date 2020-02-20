@@ -7,18 +7,29 @@ parameters:
     paths:
         - src
         - tests
-        - index.php
+        #- index.php
 
 
     ignoreErrors:
         #- '##'
-        - '#Function generateTable not found.#'
+        #- '#Function routerMatch not found.#'
+        - '#Call to an undefined method OpenEMR\\Modules\\DemoFarmAddOns\\Finder\\ModuleFinder::searchModule\(\).#'
 
 
         # Excludes calls to openEMR functions and Helper classes, these files  are not in the codebase,
+
         # but the module need it at runtime
-        - '#Function xlt not found.#'
-        - '#Call to static method setupHeader\(\) on an unknown class OpenEMR\\Core\\Header.#'
+        #- '#Function xlt not found.#'
+        #- '#Call to static method setupHeader\(\) on an unknown class OpenEMR\\Core\\Header.#'
+
+
+        # Excludes some errors/warnings in tests folder  -- example message: '#Call to an undefined method [a-zA-Z0-9\\_]+::method\(\)#'
+        -
+            message: "#^Parameter \\#1 \\$expected of static method PHPUnit\\\\Framework\\\\Assert\\:\\:assertInstanceOf\\(\\) expects class\\-string\\<object\\>, string given\\.$#"
+            path: tests/Infrastructure/ModuleContainerTest.php
+        -
+            message: '#Unable to resolve the template type ExpectedType in call to method static method PHPUnit\\Framework\\Assert::assertInstanceOf\(\)#'
+            path: %currentWorkingDirectory%/tests/Infrastructure/ModuleContainerTest.php
 
 
     excludes_analyse:
