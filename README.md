@@ -5,7 +5,7 @@
 This module provides specifically designed capabilities for a demo installation of [OpenEMR](https://github.com/openemr/openemr). Don't install this module in a real environment.
 
 Features for Maintainers|Comunity  - (OpenSource modules)
-- [ ] (**WIP**) Show and search available openEMR modules on packagist.org
+- [x] Show and search available openEMR modules on packagist.org
 - [ ] Add additional information (official/unofficial module) business logic (store, mark, filter) to the list.
 
 Features for Vendors|Developers - (Private|Closed modules)
