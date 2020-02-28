@@ -55,6 +55,6 @@
         }
     },
     "conflict": {
-        "omnipay/stripe": "<3.1"
+        "openemr/openemr": "5.0.2"
     }
 }
