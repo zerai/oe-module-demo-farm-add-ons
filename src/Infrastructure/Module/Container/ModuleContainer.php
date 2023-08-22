@@ -66,17 +66,17 @@ class ModuleContainer implements ModuleContainerInterface
 
     private function twig_service(): \Twig\Environment
     {
-        if (!$this->isModuleStandAlone()) {
-            require_once($this->getGlobalsFile());
-
-            /** @var \Twig\Environment $twigFromOpenEMR */
-            $twigFromOpenEMR = $GLOBALS['twig'];
-            $moduleRootDirectory = \dirname(__DIR__, 4);
-            $moduleLoader = new \Twig\Loader\FilesystemLoader("$moduleRootDirectory/src/Infrastructure/UI/Web/Templates");
-            $twigFromOpenEMR->setLoader($moduleLoader);
-
-            return $twigFromOpenEMR;
-        }
+//        if (!$this->isModuleStandAlone()) {
+//            require_once($this->getGlobalsFile());
+//
+//            /** @var \Twig\Environment $twigFromOpenEMR */
+//            $twigFromOpenEMR = $GLOBALS['twig'];
+//            $moduleRootDirectory = \dirname(__DIR__, 4);
+//            $moduleLoader = new \Twig\Loader\FilesystemLoader("$moduleRootDirectory/src/Infrastructure/UI/Web/Templates");
+//            $twigFromOpenEMR->setLoader($moduleLoader);
+//
+//            return $twigFromOpenEMR;
+//        }
 
         /** @var \Twig\Environment $twigFromModule */
         $twigFromModule = $this->getTwig();

@@ -26,7 +26,11 @@ class DefaultController
     {
         $response = new Response();
         try {
-            $response->setContent($this->twigEnvironment->render('packagist/default.html.twig'));
+            $searchTerm = $request->request->get('searchTerm') ?? '';
+            $collection = $this->moduleFinder->searchModule($searchTerm)->getItems();
+            $response->setContent($this->twigEnvironment->render('packagist/default.html.twig', [
+                'items' => $collection,
+            ]));
             $response->setStatusCode(Response::HTTP_OK);
         } catch (\Exception $exception) {
             //TODO
