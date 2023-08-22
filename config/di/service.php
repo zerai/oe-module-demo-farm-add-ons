@@ -1,6 +1,5 @@
 <?php declare(strict_types=1);
 
-
 use Http\Discovery\HttpClientDiscovery;
 use OpenEMR\Modules\DemoFarmAddOns\Finder\ModuleFinder;
 use OpenEMR\Modules\DemoFarmAddOns\Finder\PackagistModuleFinder;
