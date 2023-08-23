@@ -394,7 +394,7 @@ jobs:
     timeout-minutes: 10
     continue-on-error: ${{ matrix.is-php-experimental }}
     strategy:
-      max-parallel: 6
+      max-parallel: 3
       matrix:
         openemr: [master]
         php: ['8.0']
@@ -402,6 +402,15 @@ jobs:
         include:
           - openemr: 'v7_0_1_1'
             php: '8.0'
+            is-php-experimental: false
+          - openemr: 'v7_0_1'
+            php: '8.0'
+            is-php-experimental: false
+          - openemr: 'v7_0_0_2'
+            php: '7.4'
+            is-php-experimental: false
+          - openemr: 'v7_0_0_1'
+            php: '7.4'
             is-php-experimental: false
 #        php:
 #          - '8.0'
@@ -477,9 +486,15 @@ jobs:
           composer outdated
           cat composer.json
 
-      - name: Install openemr module --with-dependencies ( dev-main )
+      - name: Install openemr module ( dev-main )
         if: always()
         run: composer require zerai/oe-module-demo-farm-add-ons:dev-master --ansi
+
+      - name: Composer info
+        run: |
+          composer info
+          composer outdated
+          cat composer.json
 
       - name: Install openemr module ( last release )
         if: always()
