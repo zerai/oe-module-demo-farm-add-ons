@@ -8,7 +8,6 @@
  */
 
 use OpenEMR\Modules\DemoFarmAddOns\Finder\PackagistModuleFinder;
-use OpenEMR\Modules\DemoFarmAddOns\Infrastructure\Module\Container\ModuleContainer;
 use OpenEMR\Modules\DemoFarmAddOns\Infrastructure\UI\Api\ApiController;
 use OpenEMR\Modules\DemoFarmAddOns\Infrastructure\UI\Web\DefaultController;
 use OpenEMR\Modules\DemoFarmAddOns\Infrastructure\UI\Web\NotFoundController;
@@ -38,7 +37,7 @@ $response->send();
 
 
 
-function routerMatch(Request $request,  $container): Response
+function routerMatch(Request $request, ContainerInterface $container): Response
 {
     if ($request->getRequestUri() === '/interface/modules/custom_modules/oe-module-demo-farm-add-ons/api/search/' ||
         $request->getRequestUri() === '/interface/modules/custom_modules/oe-module-demo-farm-add-ons/api/search') {

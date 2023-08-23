@@ -31,7 +31,7 @@ class Module
         return $module;
     }
 
-    private function buildContainer()
+    private function buildContainer(): ContainerInterface
     {
         $containerBuilder = new ContainerBuilder();
         $containerBuilder->useAutowiring(true);
@@ -54,7 +54,7 @@ class Module
         return \dirname(__DIR__, 1);
     }
 
-    public function getContainer()
+    public function getContainer(): ContainerInterface
     {
         return $this->container;
     }
