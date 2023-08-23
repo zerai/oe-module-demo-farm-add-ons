@@ -399,6 +399,10 @@ jobs:
         openemr: [master]
         php: ['8.0']
         is-php-experimental: [false]
+        include:
+          - openemr: 'v7_0_1_1'
+            php: '8.0'
+            is-php-experimental: false
 #        php:
 #          - '8.0'
 #        is-php-experimental: [false]
