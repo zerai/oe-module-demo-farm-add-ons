@@ -1,17 +1,19 @@
 {
     "name": "zerai/oe-module-demo-farm-add-ons",
-    "license": "MIT",
+    "type": "openemr-module",
     "description": "OpenEMR Demo Farm Add-ons module",
     "keywords": ["open-emr"],
-    "type": "openemr-module",
+    "license": "MIT",
     "authors": [
-        {"name": "Teclai Zerai", "email": "teclaizerai@gmail.com"}
+        {
+            "name": "Teclai Zerai",
+            "email": "teclaizerai@gmail.com"
+        }
     ],
     "support": {
         "issues": "https://github.com/zerai/oe-module-demo-farm-add-ons/issues",
         "source": "https://github.com/zerai/oe-module-demo-farm-add-ons"
     },
-    "minimum-stability": "stable",
     "require": {
         "php": "^7.3 || ^8.0",
         "doctrine/collections": "1.6.4 | ^1.7",
@@ -31,6 +33,11 @@
         "symfony/http-foundation": "^4.4 || ^5.4",
         "webmozart/assert": "^1.6"
     },
+    "conflict": {
+        "openemr/openemr": "<6.0.0",
+        "symfony/cache": "^6",
+        "symfony/event-dispatcher": "^6"
+    },
     "require-dev": {
         "bamarni/composer-bin-plugin": "^1.8",
         "php-http/mock-client": "^1.0",
@@ -40,15 +47,15 @@
         "twig/twig": "^2.12"
     },
     "config": {
-        "preferred-install": {
-            "*": "dist"
-        },
-        "sort-packages": true,
         "allow-plugins": {
             "openemr/oe-module-installer-plugin": true,
             "php-http/discovery": false,
             "bamarni/composer-bin-plugin": true
-        }
+        },
+        "preferred-install": {
+            "*": "dist"
+        },
+        "sort-packages": true
     },
     "extra": {
         "bamarni-bin": {
@@ -66,5 +73,7 @@
         "psr-4": {
             "OpenEMR\\Modules\\DemoFarmAddOns\\Tests\\": "tests/"
         }
-    }
+    },
+    "minimum-stability": "stable",
+    "prefer-stable": true
 }
