@@ -28,7 +28,6 @@ if (Module::isStandAlone()) {
 
 $module = Module::bootstrap();
 
-$container = new ModuleContainer();
 $request = Request::createFromGlobals();
 /**
  * Integrating with Legacy Sessions here, if needed.
@@ -50,7 +49,6 @@ function routerMatch(Request $request,  $container): Response
         $request->getRequestUri() === '/interface/modules/custom_modules/oe-module-demo-farm-add-ons/' ||
         $request->getRequestUri() === '/interface/modules/custom_modules/oe-module-demo-farm-add-ons') {
 
-        //return (new DefaultController($container->get('packagist_finder_service'), $container->get('twig_service')))($request);
         return (new DefaultController($container->get(PackagistModuleFinder::class), $container->get(Environment::class)))($request);
     }
 
