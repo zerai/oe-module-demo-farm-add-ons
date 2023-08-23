@@ -489,8 +489,10 @@ jobs:
       - name: Install openemr module ( dev-main )
         if: always()
         run: composer require zerai/oe-module-demo-farm-add-ons:dev-master --ansi
+        continue-on-error: true
 
       - name: Composer info
+        if: always()
         run: |
           composer info
           composer outdated
