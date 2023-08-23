@@ -96,6 +96,6 @@ class PackagistItemCollectionTest extends TestCase
 
         $items = $collection->getItems();
 
-        self::assertTrue(is_array($items));
+        self::assertTrue(\is_array($items));
     }
 }
