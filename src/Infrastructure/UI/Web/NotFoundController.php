@@ -1,4 +1,5 @@
 <?php
+
 declare(strict_types=1);
 
 namespace OpenEMR\Modules\DemoFarmAddOns\Infrastructure\UI\Web;
@@ -12,7 +13,9 @@ class NotFoundController
         return new Response(
             $this->content(),
             Response::HTTP_OK,
-            ['content-type' => 'text/html']
+            [
+                'content-type' => 'text/html',
+            ]
         );
     }
 

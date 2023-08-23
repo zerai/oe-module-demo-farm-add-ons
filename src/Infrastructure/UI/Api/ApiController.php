@@ -1,4 +1,5 @@
 <?php
+
 declare(strict_types=1);
 
 namespace OpenEMR\Modules\DemoFarmAddOns\Infrastructure\UI\Api;
@@ -11,7 +12,9 @@ use Symfony\Component\HttpFoundation\Response;
 
 class ApiController
 {
-    /** @var ModuleFinder */
+    /**
+     * @var ModuleFinder
+     */
     private $moduleFinder;
 
     public function __construct(ModuleFinder $moduleFinder)
@@ -30,7 +33,9 @@ class ApiController
             $modules = $collection->getItems();
             $data = $this->serializeResults($modules);
 
-            $response->setData(['result' => $data]);
+            $response->setData([
+                'result' => $data,
+            ]);
             $response->setStatusCode(Response::HTTP_OK);
         } catch (\Exception $exception) {
             //TODO set a error reponse template
@@ -50,7 +55,11 @@ class ApiController
         $data = [];
         /** @var PackagistItem $module */
         foreach ($modules as $module) {
-            $data[] = ['name' => $module->getName(), 'url' => $module->getUrl(), 'downloads' => (string) $module->getDownloads()];
+            $data[] = [
+                'name' => $module->getName(),
+                'url' => $module->getUrl(),
+                'downloads' => (string) $module->getDownloads(),
+            ];
         }
         return $data;
     }

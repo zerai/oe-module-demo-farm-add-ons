@@ -1,4 +1,5 @@
 <?php
+
 declare(strict_types=1);
 
 namespace OpenEMR\Modules\DemoFarmAddOns\Finder;
@@ -8,7 +9,9 @@ use Webmozart\Assert\Assert;
 
 class PackagistItemCollection implements ModuleItemCollection
 {
-    /** @var ArrayCollection <int,PackagistItem>*/
+    /**
+     * @var ArrayCollection <int,PackagistItem>
+     */
     private $collection;
 
     /**

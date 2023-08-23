@@ -1,4 +1,5 @@
 <?php
+
 declare(strict_types=1);
 
 namespace OpenEMR\Modules\DemoFarmAddOns\Tests\ModuleFinder;
@@ -12,8 +13,10 @@ class PackagistModuleFinderTest extends TestCase
 {
     use PackagistHttpResponseTrait;
 
-    /** @test */
-    public function can_find_one_module():void
+    /**
+     * @test
+     */
+    public function can_find_one_module(): void
     {
         $client = $this->createHttpClientWithDefaultResponse($this->packagistDefaultSingleResultResponseContent());
         $packagistModuleFinder = new PackagistModuleFinder($client);
@@ -23,8 +26,10 @@ class PackagistModuleFinderTest extends TestCase
         self::assertEquals(1, $foundedModulesCollection->count());
     }
 
-    /** @test */
-    public function can_find_multiple_module():void
+    /**
+     * @test
+     */
+    public function can_find_multiple_module(): void
     {
         $client = $this->createHttpClientWithDefaultResponse($this->packagistDefaultMultipleResultResponseContent());
         $packagistModuleFinder = new PackagistModuleFinder($client);
@@ -34,8 +39,10 @@ class PackagistModuleFinderTest extends TestCase
         self::assertEquals(2, $foundedModulesCollection->count());
     }
 
-    /** @test */
-    public function can_handle_http_exception():void
+    /**
+     * @test
+     */
+    public function can_handle_http_exception(): void
     {
         $this->expectException(\RuntimeException::class);
 
@@ -53,7 +60,7 @@ class PackagistModuleFinderTest extends TestCase
      *
      * @test
      */
-    public function can_handle_a_empty_respose_content():void
+    public function can_handle_a_empty_respose_content(): void
     {
         $client = $this->createHttpClientWithDefaultResponse($this->packagistEmptyResponseContent());
         $packagistModuleFinder = new PackagistModuleFinder($client);
@@ -63,7 +70,9 @@ class PackagistModuleFinderTest extends TestCase
         self::assertEquals(0, $foundedModulesCollection->count());
     }
 
-    /** @test */
+    /**
+     * @test
+     */
     public function can_generate_an_valid_http_endpoint_without_an_input_queryString_parameter(): void
     {
         $expectedEndpoint = 'https://packagist.org/search.json?q=&type=openemr-module';
@@ -77,12 +86,14 @@ class PackagistModuleFinderTest extends TestCase
         self::assertTrue((bool) filter_var($endpoint, FILTER_VALIDATE_URL));
     }
 
-    /** @test */
+    /**
+     * @test
+     */
     public function can_generate_an_valid_http_endpoint_from_an_input_queryString_parameter(): void
     {
         $queryString = 'vendor_1';
 
-        $expectedEndpoint = 'https://packagist.org/search.json?q='.$queryString.'&type=openemr-module';
+        $expectedEndpoint = 'https://packagist.org/search.json?q=' . $queryString . '&type=openemr-module';
 
         $packagistModuleFinder = new PackagistModuleFinder($client = new Client());
 
@@ -92,7 +103,6 @@ class PackagistModuleFinderTest extends TestCase
         self::assertSame($expectedEndpoint, $endpoint);
         self::assertTrue((bool) filter_var($endpoint, FILTER_VALIDATE_URL));
     }
-
 
     private function createHttpClientWithDefaultResponse(string $contentResponse, int $httpStatusCode = 200): Client
     {
@@ -118,7 +128,9 @@ class PackagistModuleFinderTest extends TestCase
         return $client;
     }
 
-    /** @test */
+    /**
+     * @test
+     */
     public function httpClientTest(): void
     {
         $stream = $this->createMock('Psr\Http\Message\StreamInterface');

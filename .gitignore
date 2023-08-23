@@ -1,8 +1,10 @@
 /.idea/
 
-/vendor/
+
 /extra/
+/tools/**/vendor
 /var/
+/vendor/
 
 composer.lock
 .php_cs.cache

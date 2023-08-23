@@ -1,4 +1,5 @@
 <?php
+
 declare(strict_types=1);
 
 namespace OpenEMR\Modules\DemoFarmAddOns\Tests\ModuleFinder;
@@ -14,7 +15,9 @@ class PackagistItemCollectionTest extends TestCase
 
     use PackagistHttpResponseTrait;
 
-    /** @test */
+    /**
+     * @test
+     */
     public function can_be_created(): void
     {
         $collection = new PackagistItemCollection();
@@ -23,7 +26,9 @@ class PackagistItemCollectionTest extends TestCase
         self::assertInstanceOf(PackagistItemCollection::class, $collection);
     }
 
-    /** @test */
+    /**
+     * @test
+     */
     public function can_be_created_with_data(): void
     {
         $data = [
@@ -33,7 +38,7 @@ class PackagistItemCollectionTest extends TestCase
                 self::IRRELEVANT,
                 self::IRRELEVANT,
                 10
-            )
+            ),
         ];
 
         $collection = new PackagistItemCollection($data);
@@ -41,7 +46,9 @@ class PackagistItemCollectionTest extends TestCase
         self::assertInstanceOf(PackagistItemCollection::class, $collection);
     }
 
-    /** @test */
+    /**
+     * @test
+     */
     public function can_count_internal_elements(): void
     {
         $data = [
@@ -58,16 +65,17 @@ class PackagistItemCollectionTest extends TestCase
                 self::IRRELEVANT,
                 self::IRRELEVANT,
                 10
-            )
+            ),
         ];
 
         $collection = new PackagistItemCollection($data);
 
-
         self::assertEquals(2, $collection->count());
     }
 
-    /** @test */
+    /**
+     * @test
+     */
     public function can_return_elements_as_array(): void
     {
         $data = [
@@ -84,7 +92,7 @@ class PackagistItemCollectionTest extends TestCase
                 self::IRRELEVANT,
                 self::IRRELEVANT,
                 10
-            )
+            ),
         ];
         $collection = new PackagistItemCollection($data);
 

@@ -1,13 +1,13 @@
-<?php declare(strict_types=1);
+<?php
+
+declare(strict_types=1);
 
 use OpenEMR\Modules\DemoFarmAddOns\Module;
 use Twig\Environment;
 use Twig\Loader\FilesystemLoader;
 
-
-
 $loader = new FilesystemLoader([
-    Module::mainDir(). '/src/Infrastructure/UI/Web/Templates',
+    Module::mainDir() . '/src/Infrastructure/UI/Web/Templates',
 ]);
 
 $twigOptions = [];
