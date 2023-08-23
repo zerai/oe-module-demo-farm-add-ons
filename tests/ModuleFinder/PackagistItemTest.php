@@ -1,4 +1,5 @@
 <?php
+
 declare(strict_types=1);
 
 namespace OpenEMR\Modules\DemoFarmAddOns\Tests\ModuleFinder;
@@ -11,7 +12,9 @@ class PackagistItemTest extends TestCase
 {
     private const IRRELEVANT = 'irrelevant';
 
-    /** @test */
+    /**
+     * @test
+     */
     public function can_be_created(): void
     {
         $packagistItem = PackagistItem::create(

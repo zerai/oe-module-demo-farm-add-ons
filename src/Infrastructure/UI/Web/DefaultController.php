@@ -1,4 +1,5 @@
 <?php
+
 declare(strict_types=1);
 
 namespace OpenEMR\Modules\DemoFarmAddOns\Infrastructure\UI\Web;
@@ -10,10 +11,14 @@ use Twig\Environment;
 
 class DefaultController
 {
-    /** @var ModuleFinder */
+    /**
+     * @var ModuleFinder
+     */
     private $moduleFinder;
 
-    /** @var Environment */
+    /**
+     * @var Environment
+     */
     private $twigEnvironment;
 
     public function __construct(ModuleFinder $moduleFinder, Environment $twigEnvironment)

@@ -1,4 +1,5 @@
 <?php
+
 declare(strict_types=1);
 
 namespace OpenEMR\Modules\DemoFarmAddOns\Tests\ModuleFinder;
@@ -7,7 +8,7 @@ trait PackagistHttpResponseTrait
 {
     private function packagistEmptyResponseContent(): string
     {
-        return  <<<JSON
+        return <<<JSON
 {
   "results": [],
   "total": 0
@@ -15,7 +16,7 @@ trait PackagistHttpResponseTrait
 JSON;
     }
 
-    private function packagistDefaultSingleResultResponseContent():string
+    private function packagistDefaultSingleResultResponseContent(): string
     {
         return <<<JSON
 {
@@ -34,8 +35,7 @@ JSON;
 JSON;
     }
 
-
-    private function packagistDefaultMultipleResultResponseContent():string
+    private function packagistDefaultMultipleResultResponseContent(): string
     {
         return <<<JSON
 {
@@ -62,7 +62,7 @@ JSON;
 JSON;
     }
 
-    private function packagistEmptyResultResponseContent():string
+    private function packagistEmptyResultResponseContent(): string
     {
         return <<<JSON
 {

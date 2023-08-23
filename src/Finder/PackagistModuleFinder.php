@@ -1,4 +1,5 @@
 <?php
+
 declare(strict_types=1);
 
 namespace OpenEMR\Modules\DemoFarmAddOns\Finder;
@@ -11,7 +12,9 @@ class PackagistModuleFinder implements ModuleFinder
 {
     private const HOST = 'packagist.org';
 
-    /** @var HttpClient */
+    /**
+     * @var HttpClient
+     */
     private $httpClient;
 
     /**
@@ -24,7 +27,6 @@ class PackagistModuleFinder implements ModuleFinder
     }
 
     /**
-     * @param string $queryString
      * @return PackagistItemCollection
      * @throws \Psr\Http\Client\ClientExceptionInterface
      */
@@ -32,7 +34,7 @@ class PackagistModuleFinder implements ModuleFinder
     {
         $endpoint = $this->endpoint($queryString);
         $jsonResponse = $this->doSend($endpoint);
-        $decodedResponse = json_decode($jsonResponse, true);
+        $decodedResponse = json_decode($jsonResponse, true, 512, JSON_THROW_ON_ERROR);
         $itemsFromResponse = $decodedResponse['results'];
 
         return $this->buildCollection($itemsFromResponse);
@@ -44,8 +46,6 @@ class PackagistModuleFinder implements ModuleFinder
     }
 
     /**
-     * @param string $httpEndpoint
-     * @return string
      * @throws \Psr\Http\Client\ClientExceptionInterface
      */
     private function doSend(string $httpEndpoint): string
@@ -67,7 +67,6 @@ class PackagistModuleFinder implements ModuleFinder
 
     /**
      * @param iterable<array> $itemsFromResponse
-     * @return PackagistItemCollection
      */
     private function buildCollection(iterable $itemsFromResponse): PackagistItemCollection
     {

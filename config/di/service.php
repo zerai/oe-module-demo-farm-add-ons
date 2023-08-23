@@ -1,4 +1,6 @@
-<?php declare(strict_types=1);
+<?php
+
+declare(strict_types=1);
 
 use Http\Discovery\HttpClientDiscovery;
 use OpenEMR\Modules\DemoFarmAddOns\Finder\ModuleFinder;
@@ -13,4 +15,3 @@ return [
     DefaultController::class => DI\create()
         ->constructor(DI\get(ModuleFinder::class), DI\get(Environment::class)),
 ];
-
