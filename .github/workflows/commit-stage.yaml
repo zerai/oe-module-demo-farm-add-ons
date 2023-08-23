@@ -23,13 +23,10 @@ jobs:
       max-parallel: 5
       matrix:
         php:
-          - '7.2'
+          - '7.3'
         is-php-experimental: [false]
         generate-coverage-report: [false]
         include:
-          - php: '7.3'
-            is-php-experimental: false
-            generate-coverage-report: false
           - php: '7.4'
             is-php-experimental: true
             generate-coverage-report: false
