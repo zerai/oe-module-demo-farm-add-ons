@@ -312,7 +312,7 @@ jobs:
 
       - name: Install psalm
         run: |
-          composer bin psalm install  --no-progress --ansi
+          composer bin sa install  --no-progress --ansi
 
       - name: Run psalm
         run: ./vendor/bin/psalm --no-cache
