@@ -1,6 +1,6 @@
 <?php declare(strict_types=1);
 
-namespace OpenEMR\Modules\DemoFarmAddOns\Tests\ModuleFinder;
+namespace OpenEMR\Modules\DemoFarmAddOns\Tests\Unit\ModuleFinder;
 
 use Exception;
 use Http\Mock\Client;
