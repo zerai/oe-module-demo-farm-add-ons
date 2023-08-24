@@ -59,6 +59,12 @@
             "bin-links": true,
             "forward-command": false,
             "target-directory": "tools"
+        },
+        "oe-module-demo-farm-add-ons": {
+            "openemr-supported-version": [
+                "v7_0_1_1",
+                "v7_0_1"
+            ]
         }
     },
     "autoload": {
