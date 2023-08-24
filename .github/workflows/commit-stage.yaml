@@ -392,7 +392,7 @@ jobs:
     if: ${{ github.ref_name == 'master' }}
     runs-on: ubuntu-22.04
     timeout-minutes: 10
-    continue-on-error: ${{ matrix.is-php-experimental }}
+    #continue-on-error: ${{ matrix.is-php-experimental }}
     strategy:
       max-parallel: 3
       matrix:
