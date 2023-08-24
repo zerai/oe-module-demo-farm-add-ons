@@ -73,10 +73,6 @@
     },
     "minimum-stability": "stable",
     "prefer-stable": true,
-    "support": {
-        "issues": "https://github.com/zerai/oe-module-demo-farm-add-ons/issues",
-        "source": "https://github.com/zerai/oe-module-demo-farm-add-ons"
-    },
     "scripts": {
         "cs": "./vendor/bin/ecs",
         "cs:fix": "./vendor/bin/ecs --fix",
@@ -96,5 +92,9 @@
         "tf": "Run functional testsuite",
         "ti": "Run integration testsuite",
         "tu": "Run unit testsuite"
+    },
+    "support": {
+        "issues": "https://github.com/zerai/oe-module-demo-farm-add-ons/issues",
+        "source": "https://github.com/zerai/oe-module-demo-farm-add-ons"
     }
 }
