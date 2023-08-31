@@ -2,9 +2,11 @@
 
 namespace OpenEMR\Modules\DemoFarmAddOns\Infrastructure\UI\Web;
 
+use Nyholm\Psr7\Factory\Psr17Factory;
 use OpenEMR\Modules\DemoFarmAddOns\Finder\ModuleFinder;
-use Symfony\Component\HttpFoundation\Request;
-use Symfony\Component\HttpFoundation\Response;
+
+use Psr\Http\Message\ResponseInterface;
+use Psr\Http\Message\ServerRequestInterface;
 use Twig\Environment;
 
 class DefaultController
@@ -25,22 +27,22 @@ class DefaultController
         $this->twigEnvironment = $twigEnvironment;
     }
 
-    public function __invoke(Request $request): Response
+    public function __invoke(ServerRequestInterface $request): ResponseInterface
     {
-        $response = new Response();
         try {
-            $searchTerm = $request->request->get('searchTerm') ?? '';
+            //$searchTerm = $request->request->get('searchTerm') ?? '';
+            $searchTerm = '';
             $collection = $this->moduleFinder->searchModule($searchTerm)->getItems();
-            $response->setContent($this->twigEnvironment->render('packagist/default.html.twig', [
+            $content = $this->twigEnvironment->render('packagist/default.html.twig', [
                 'items' => $collection,
-            ]));
-            $response->setStatusCode(Response::HTTP_OK);
+            ]);
         } catch (\Exception $exception) {
             //TODO
         }
 
-        $response->prepare($request);
+        $psr17Factory = new Psr17Factory();
+        $responseBody = $psr17Factory->createStream($content);
 
-        return $response;
+        return $psr17Factory->createResponse(200)->withBody($responseBody);
     }
 }

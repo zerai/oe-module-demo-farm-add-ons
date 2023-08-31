@@ -4,9 +4,11 @@
     <div class="container-fluid main-container" style="margin-top:50px">
 
         <div>
-            {# SEARCH FORM DISABLED #}
-            {# {{ include('packagist/_form.html.twig') }} #}
+             SEARCH FORM DISABLED
+             {{ include('packagist/_form.html.twig') }}
         </div>
+
+        <div id="output" class="container"></div>
 
         <div class="my-5">
             <h3>
@@ -42,6 +44,35 @@
 
 {% block module_javascripts %}
     {{ parent() }}
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
     <script>
+        (function () {
+            var output = document.getElementById('output');
+            document.getElementById('sendSearchForm').onclick = function () {
+                //var npiNumber = document.getElementById('npiNumber').value;
+                var searchTerm = document.getElementById('searchTerm').value;
+                console.log(searchTerm);
+
+
+                axios.post('/interface/modules/custom_modules/oe-module-demo-farm-add-ons/api/search', {
+
+                        'searchTerm': searchTerm
+                    }, {
+                        headers: {
+                            'Content-Type': 'application/x-www-form-urlencoded'
+                        }
+                    }
+                )
+                    .then(function (res) {
+                        output.className = 'container';
+                        output.innerHTML = res.data;
+                        console.log(res.data)
+                    })
+                    .catch(function (err) {
+                        output.className = 'container text-danger';
+                        output.innerHTML = err.message;
+                    });
+            };
+        })();
     </script>
 {% endblock %}
