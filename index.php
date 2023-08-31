@@ -53,7 +53,6 @@ $response = routerMatch($request, $module->getContainer());
 
 function routerMatch(ServerRequestInterface $request, ContainerInterface $container): ResponseInterface
 {
-    //dd($request->getUri()->getPath());
     if ($request->getUri()->getPath() === '/interface/modules/custom_modules/oe-module-demo-farm-add-ons/api/search/' ||
         $request->getUri()->getPath() === '/interface/modules/custom_modules/oe-module-demo-farm-add-ons/api/search') {
         return (new ApiController($container->get(PackagistModuleFinder::class)))($request);

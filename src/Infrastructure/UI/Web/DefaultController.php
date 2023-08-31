@@ -29,12 +29,17 @@ class DefaultController
 
     public function __invoke(ServerRequestInterface $request): ResponseInterface
     {
-        try {
-            //$searchTerm = $request->request->get('searchTerm') ?? '';
+        if ($request->getParsedBody() !== null) {
+            $searchTerm = $request->getParsedBody()['searchTerm'];
+        } else {
             $searchTerm = '';
+        }
+
+        try {
             $collection = $this->moduleFinder->searchModule($searchTerm)->getItems();
             $content = $this->twigEnvironment->render('packagist/default.html.twig', [
                 'items' => $collection,
+                'searchTerm' => $searchTerm,
             ]);
         } catch (\Exception $exception) {
             //TODO

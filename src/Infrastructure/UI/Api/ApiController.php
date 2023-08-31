@@ -22,12 +22,8 @@ class ApiController
 
     public function __invoke(ServerRequestInterface $request): ResponseInterface
     {
-        //dd($request->getParsedBody());
         $searchTerm = $request->getParsedBody()['searchTerm'];
         try {
-            $data = [];
-            //$searchTerm = $request->request->get('searchTerm') ?? '';
-            //$searchTerm = '';
             $collection = $this->moduleFinder->searchModule($searchTerm);
             $modules = $collection->getItems();
             $data = $this->serializeResults($modules);
