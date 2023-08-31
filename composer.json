@@ -41,6 +41,7 @@
         "bamarni/composer-bin-plugin": "^1.8",
         "php-http/mock-client": "^1.0",
         "phpunit/phpunit": "~8.4",
+        "symfony/var-dumper": "^5.4",
         "twig/twig": "^2.12"
     },
     "config": {
