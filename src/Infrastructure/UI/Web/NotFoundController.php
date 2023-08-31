@@ -2,19 +2,17 @@
 
 namespace OpenEMR\Modules\DemoFarmAddOns\Infrastructure\UI\Web;
 
-use Symfony\Component\HttpFoundation\Response;
+use Nyholm\Psr7\Factory\Psr17Factory;
+use Psr\Http\Message\ResponseInterface;
 
 class NotFoundController
 {
-    public function __invoke(): Response
+    public function __invoke(): ResponseInterface
     {
-        return new Response(
-            $this->content(),
-            Response::HTTP_OK,
-            [
-                'content-type' => 'text/html',
-            ]
-        );
+        $psr17Factory = new Psr17Factory();
+        $responseBody = $psr17Factory->createStream($this->content());
+
+        return $psr17Factory->createResponse(200)->withBody($responseBody);
     }
 
     private function content(): string

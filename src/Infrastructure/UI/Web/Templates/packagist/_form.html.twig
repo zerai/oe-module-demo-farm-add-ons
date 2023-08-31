@@ -1,13 +1,11 @@
-
-    <form id="searchForm" class="form form-inline" role="form" action="api/search">
-        <div class="row">
-            <div class="form-group">
-                <input class="form-control" type="search" value="" id="searchTerm">
-            </div>
-            <div class="form-group">
-                <button type="submit" class="btn btn-info" onclick="searchModules(event,this)" title="Search">
-                    Search
-                </button>
-            </div>
+<form id="searchForm" class="form form-inline" role="form" enctype="application/x-www-form-urlencoded" method="POST" action="/interface/modules/custom_modules/oe-module-demo-farm-add-ons">
+    <div class="row">
+        <div class="form-group">
+            <input class="form-control" type="text" value="{{ searchTerm }}" id="searchTerm" name="searchTerm">
         </div>
-    </form>
+        <div class="form-group mx-1">
+            <input type="submit" class="btn btn-info" value="Search" title="Search" />
+        </div>
+    </div>
+</form>
+

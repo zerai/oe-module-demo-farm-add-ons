@@ -2,11 +2,11 @@
 
 namespace OpenEMR\Modules\DemoFarmAddOns\Infrastructure\UI\Api;
 
+use Nyholm\Psr7\Factory\Psr17Factory;
 use OpenEMR\Modules\DemoFarmAddOns\Finder\ModuleFinder;
 use OpenEMR\Modules\DemoFarmAddOns\Finder\PackagistItem;
-use Symfony\Component\HttpFoundation\JsonResponse;
-use Symfony\Component\HttpFoundation\Request;
-use Symfony\Component\HttpFoundation\Response;
+use Psr\Http\Message\ResponseInterface;
+use Psr\Http\Message\ServerRequestInterface;
 
 class ApiController
 {
@@ -20,28 +20,25 @@ class ApiController
         $this->moduleFinder = $moduleFinder;
     }
 
-    public function __invoke(Request $request): Response
+    public function __invoke(ServerRequestInterface $request): ResponseInterface
     {
-        $response = new JsonResponse();
-
+        $searchTerm = $request->getParsedBody()['searchTerm'];
         try {
-            $data = [];
-            $searchTerm = $request->request->get('searchTerm') ?? '';
             $collection = $this->moduleFinder->searchModule($searchTerm);
             $modules = $collection->getItems();
             $data = $this->serializeResults($modules);
 
-            $response->setData([
-                'result' => $data,
-            ]);
-            $response->setStatusCode(Response::HTTP_OK);
+            $jsonData = json_encode($data, JSON_THROW_ON_ERROR);
         } catch (\Exception $exception) {
             //TODO set a error reponse template
         }
 
-        $response->prepare($request);
+        $psr17Factory = new Psr17Factory();
+        $responseBody = $psr17Factory->createStream($jsonData);
 
-        return $response;
+        return $psr17Factory->createResponse(200)
+            ->withBody($responseBody)
+            ->withAddedHeader('Content-type', 'application/json');
     }
 
     /**
