@@ -9,7 +9,7 @@ class Module
 {
     public const MODULE_NAME = 'Demo Farm add-ons';
 
-    public const MODULE_VERSION = 'v0.2.11';
+    public const MODULE_VERSION = 'v0.2.12';
 
     public const MODULE_SOURCE_CODE = 'https://github.com/zerai/oe-module-demo-farm-add-ons';
 
